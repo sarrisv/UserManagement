@@ -18,8 +18,10 @@ echo Valid user account name is: %Name%
 if "%Name%"=="Administrator" goto TrimLeft
 if "%Name%"=="Guest" goto TrimLeft
 if "%Name%"=="The command complete" goto EOF
-set /p "auth=Is %Name% an authorized user? y|n  "
-if "%auth%"=="y" set /p "type=Is %Name% an Admin? y|n  "
+set /p "auth=Is %Name% an authorized user? (y|n)  "(
+net user %Name% CyberPatriot1!
+if "%auth%"=="y" set /p "type=Is %Name% an Admin? (y|n)  "
+)
 if "%auth%"=="n" net user %Name% /del
 if "%type%"=="y" net localgroup administrators %Name% /add
 if "%type%"=="n" (
